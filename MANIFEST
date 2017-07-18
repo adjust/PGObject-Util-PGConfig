@@ -1,7 +1,7 @@
 Changes
 lib/PGObject/Util/PGConfig.pm
-MANIFEST			This list of files
-MANIFEST.SKIP
+Makefile.PL
+MANIFEST
 README
 t/00-load.t
 t/01-store-api.t

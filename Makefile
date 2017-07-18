@@ -62,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = PGObject::Util::PGConfig
 NAME_SYM = PGObject_Util_PGConfig
-VERSION = v0.01
+VERSION = v0.01.01
 VERSION_MACRO = VERSION
-VERSION_SYM = v0_01
+VERSION_SYM = v0_01_01
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = v0.01
+XS_VERSION = v0.01.01
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -260,7 +260,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = PGObject-Util-PGConfig
-DISTVNAME = PGObject-Util-PGConfig-v0.01
+DISTVNAME = PGObject-Util-PGConfig-v0.01.01
 
 
 # --- MakeMaker macro section:
@@ -442,22 +442,22 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  mon.out perl$(EXE_EXT) \
-	  *$(OBJ_EXT) core.[0-9][0-9] \
-	  pm_to_blib core.[0-9] \
-	  perl.exe *$(LIB_EXT) \
-	  core.[0-9][0-9][0-9] $(BASEEXT).def \
 	  $(BASEEXT).exp pm_to_blib.ts \
-	  $(INST_ARCHAUTODIR)/extralibs.ld perlmain.c \
-	  MYMETA.yml so_locations \
-	  perl tmon.out \
-	  MYMETA.json core.[0-9][0-9][0-9][0-9][0-9] \
-	  $(INST_ARCHAUTODIR)/extralibs.all core \
-	  $(BOOTSTRAP) *perl.core \
-	  $(BASEEXT).x $(BASEEXT).bso \
-	  core.*perl.*.? $(MAKE_APERL_FILE) \
-	  lib$(BASEEXT).def core.[0-9][0-9][0-9][0-9] \
-	  blibdirs.ts 
+	  *$(LIB_EXT) core.[0-9][0-9][0-9][0-9] \
+	  core.[0-9][0-9][0-9][0-9][0-9] core.*perl.*.? \
+	  core tmon.out \
+	  $(BASEEXT).x pm_to_blib \
+	  $(MAKE_APERL_FILE) mon.out \
+	  so_locations lib$(BASEEXT).def \
+	  *perl.core perlmain.c \
+	  $(BOOTSTRAP) core.[0-9][0-9][0-9] \
+	  perl *$(OBJ_EXT) \
+	  $(BASEEXT).def core.[0-9] \
+	  MYMETA.yml $(INST_ARCHAUTODIR)/extralibs.all \
+	  blibdirs.ts perl$(EXE_EXT) \
+	  MYMETA.json core.[0-9][0-9] \
+	  $(INST_ARCHAUTODIR)/extralibs.ld perl.exe \
+	  $(BASEEXT).bso 
 	- $(RM_RF) \
 	  PGObject-Util-PGConfig-* blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
@@ -501,7 +501,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  perl: 5.006' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: v0.01' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: v0.01.01' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -543,7 +543,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "v0.01"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "v0.01.01"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
