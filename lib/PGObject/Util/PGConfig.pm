@@ -11,11 +11,11 @@ PGObject::Util::PGConfig - Postgres Configuration Management
 
 =head1 VERSION
 
-Version 0.01.01
+Version 0.01.02
 
 =cut
 
-our $VERSION = 'v0.01.01';
+our $VERSION = 'v0.01.02';
 
 
 =head1 SYNOPSIS
@@ -178,14 +178,14 @@ Synchronizes all stored variables into the current session if applicable.
 sub sync_session{
     my ($self, $dbh) = @_;
     my $query = "
-       SELECT s.name FROM pg_setting s
+       SELECT s.name FROM pg_settings s
          JOIN pg_roles r ON rolname = session_user
         WHERE name = any(?) 
               AND (s.context = 'user'
                     OR s.context = 'superuser' AND r.rolsuper)
     ";
     my $sth = $dbh->prepare($query);
-    $sth->execute([$self->list_keys]);
+    $sth->execute([$self->known_keys]);
     my $setsth = $dbh->prepare(
        "SELECT set_config(?, ?, false)");
     while (my ($setname) = $sth->fetchrow_array){
