@@ -23,7 +23,7 @@
 #     TEST_REQUIRES => {  }
 #     VERSION_FROM => q[lib/PGObject/Util/PGConfig.pm]
 #     clean => { FILES=>q[PGObject-Util-PGConfig-*] }
-#     dist => { SUFFIX=>q[gz], COMPRESS=>q[gzip -9f] }
+#     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
 
 # --- MakeMaker post_initialize section:
 
@@ -62,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = PGObject::Util::PGConfig
 NAME_SYM = PGObject_Util_PGConfig
-VERSION = v0.01.01
+VERSION = v0.01.02
 VERSION_MACRO = VERSION
-VERSION_SYM = v0_01_01
+VERSION_SYM = v0_01_02
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = v0.01.01
+XS_VERSION = v0.01.02
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -260,7 +260,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = PGObject-Util-PGConfig
-DISTVNAME = PGObject-Util-PGConfig-v0.01.01
+DISTVNAME = PGObject-Util-PGConfig-v0.01.02
 
 
 # --- MakeMaker macro section:
@@ -442,22 +442,22 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  $(BASEEXT).exp pm_to_blib.ts \
-	  *$(LIB_EXT) core.[0-9][0-9][0-9][0-9] \
-	  core.[0-9][0-9][0-9][0-9][0-9] core.*perl.*.? \
-	  core tmon.out \
-	  $(BASEEXT).x pm_to_blib \
-	  $(MAKE_APERL_FILE) mon.out \
-	  so_locations lib$(BASEEXT).def \
-	  *perl.core perlmain.c \
-	  $(BOOTSTRAP) core.[0-9][0-9][0-9] \
-	  perl *$(OBJ_EXT) \
-	  $(BASEEXT).def core.[0-9] \
-	  MYMETA.yml $(INST_ARCHAUTODIR)/extralibs.all \
-	  blibdirs.ts perl$(EXE_EXT) \
-	  MYMETA.json core.[0-9][0-9] \
-	  $(INST_ARCHAUTODIR)/extralibs.ld perl.exe \
-	  $(BASEEXT).bso 
+	  perl.exe core.*perl.*.? \
+	  $(BASEEXT).bso MYMETA.json \
+	  core.[0-9][0-9][0-9] pm_to_blib.ts \
+	  $(BOOTSTRAP) perl \
+	  so_locations core.[0-9][0-9][0-9][0-9][0-9] \
+	  perl$(EXE_EXT) *$(OBJ_EXT) \
+	  $(INST_ARCHAUTODIR)/extralibs.all MYMETA.yml \
+	  core.[0-9][0-9] $(INST_ARCHAUTODIR)/extralibs.ld \
+	  *$(LIB_EXT) pm_to_blib \
+	  core.[0-9] perlmain.c \
+	  *perl.core lib$(BASEEXT).def \
+	  $(BASEEXT).exp $(MAKE_APERL_FILE) \
+	  $(BASEEXT).def core \
+	  core.[0-9][0-9][0-9][0-9] blibdirs.ts \
+	  tmon.out $(BASEEXT).x \
+	  mon.out 
 	- $(RM_RF) \
 	  PGObject-Util-PGConfig-* blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
@@ -472,7 +472,7 @@ realclean_subdirs :
 # Delete temporary files (via clean) and also delete dist files
 realclean purge ::  clean realclean_subdirs
 	- $(RM_F) \
-	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) 
+	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) 
 	- $(RM_RF) \
 	  $(DISTVNAME) 
 
@@ -501,7 +501,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  perl: 5.006' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: v0.01.01' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: v0.01.02' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -543,7 +543,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "v0.01.01"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "v0.01.02"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
