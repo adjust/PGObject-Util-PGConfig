@@ -14,5 +14,6 @@ env:
   - DB_TESTING=1 COVERAGE=1 RELEASE_TESTING=1
 before_install:
    - cpanm DBI
+   - cpanm DBD::Pg
    - eval $(curl https://travis-perl.github.io/init) --auto
 
