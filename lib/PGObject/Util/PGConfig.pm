@@ -214,7 +214,7 @@ sub apply_system {
         croak 'DB connection for apply_system must be for a superuser';
     }
     my $setting_sth = $dbh->prepare("
-      select name from setting where name = any(?)
+      select name from pg_settings where name = any(?)
       and context <> 'internal'
     ");
     $setting_sth->execute([$self->known_keys]);
