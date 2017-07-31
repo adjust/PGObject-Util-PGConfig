@@ -13,7 +13,7 @@ ok($dbh, 'got a database handle');
 my $config = PGObject::Util::PGConfig->new();
 ok($config, 'got a config object');
 
-ok(scalar (grep {$_ eq 'statement_timeout'} $config->list), 
+ok(scalar (grep {$_ eq 'statement_timeout'} $config->list($dbh)), 
     'statement_timeout found in config list for session');
 $config->set('statement_timeout', 314);
 $config->set('enable_seqscan', 'no');
