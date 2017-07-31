@@ -273,7 +273,7 @@ Writes the contents, per filecontents above, to $path
 sub tofile {
     my ($self, $path) = @_;
     my $fh;
-    open $fh, '>', $path;
+    open($fh, '>', $path) or die $!;
     print $fh $self->filecontents;
     close $fh;
 }
