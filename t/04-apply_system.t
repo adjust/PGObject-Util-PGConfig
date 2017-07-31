@@ -14,6 +14,6 @@ $config->set('max_connections', 2000);
 $config->set('statement_timeout', 500);
 $config->set('nonexistent_nonsense', 'fooooooo');
 
-$dbh = DBI->connect('dbi::Pg::dbname=postgres');
+$dbh = DBI->connect('dbi:Pg:dbname=postgres');
 
 is(scalar $config->apply_system($dbh), 2, 'Applied 2 config changes');
