@@ -1,4 +1,4 @@
-use Test::More tests => 12;
+use Test::More tests => 14;
 
 use PGObject::Util::PGConfig;
 
@@ -37,3 +37,14 @@ test = 'overwritten'
 tested = 'this isn''t invalid'"
 , 'Correct output');
 
+my $fileconfig = PGObject::Util::PGConfig->new();
+$fileconfig->fromfile('t/data/myconf.conf');
+is($fileconfig->filecontents, 
+"aaa = '1'
+bbb = '2'
+ccc = 'aaa'
+foo = 'bar''s'", 
+"Correct file contents out");
+$fileconfig->tofile('t/data/myconfig2.conf');
+open my $fh, '<', 't/data/myconfig2.conf';
+is((join '', <$fh>), $fileconfig->filecontents, 'correct output written to file');

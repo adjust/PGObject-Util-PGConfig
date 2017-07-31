@@ -4,7 +4,7 @@ use PGObject::Util::PGConfig;
 
 plan skip_all => 'DB_TESTING not set' unless $ENV{DB_TESTING};
 
-plan tests => 5;
+plan tests => 6;
 
 require DBI;
 
@@ -13,6 +13,8 @@ ok($dbh, 'got a database handle');
 my $config = PGObject::Util::PGConfig->new();
 ok($config, 'got a config object');
 
+ok(scalar (grep {$_ eq 'statement_timeout'} $config->list($dbh)), 
+    'statement_timeout found in config list for session');
 $config->set('statement_timeout', 314);
 $config->set('enable_seqscan', 'no');
 
