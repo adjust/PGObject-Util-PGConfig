@@ -19,7 +19,7 @@
 #     MIN_PERL_VERSION => q[5.006]
 #     NAME => q[PGObject::Util::PGConfig]
 #     PL_FILES => {  }
-#     PREREQ_PM => { Test::More=>q[0] }
+#     PREREQ_PM => { DBI=>q[0], DBD::Pg=>q[0], Test::More=>q[0] }
 #     TEST_REQUIRES => {  }
 #     VERSION_FROM => q[lib/PGObject/Util/PGConfig.pm]
 #     clean => { FILES=>q[PGObject-Util-PGConfig-*] }
@@ -62,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = PGObject::Util::PGConfig
 NAME_SYM = PGObject_Util_PGConfig
-VERSION = v0.01.02
+VERSION = 0.010002
 VERSION_MACRO = VERSION
-VERSION_SYM = v0_01_02
+VERSION_SYM = 0_010002
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = v0.01.02
+XS_VERSION = 0.010002
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -260,7 +260,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = PGObject-Util-PGConfig
-DISTVNAME = PGObject-Util-PGConfig-v0.01.02
+DISTVNAME = PGObject-Util-PGConfig-0.010002
 
 
 # --- MakeMaker macro section:
@@ -442,22 +442,22 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  perl.exe core.*perl.*.? \
-	  $(BASEEXT).bso MYMETA.json \
-	  core.[0-9][0-9][0-9] pm_to_blib.ts \
-	  $(BOOTSTRAP) perl \
-	  so_locations core.[0-9][0-9][0-9][0-9][0-9] \
-	  perl$(EXE_EXT) *$(OBJ_EXT) \
-	  $(INST_ARCHAUTODIR)/extralibs.all MYMETA.yml \
-	  core.[0-9][0-9] $(INST_ARCHAUTODIR)/extralibs.ld \
-	  *$(LIB_EXT) pm_to_blib \
-	  core.[0-9] perlmain.c \
-	  *perl.core lib$(BASEEXT).def \
-	  $(BASEEXT).exp $(MAKE_APERL_FILE) \
-	  $(BASEEXT).def core \
-	  core.[0-9][0-9][0-9][0-9] blibdirs.ts \
-	  tmon.out $(BASEEXT).x \
-	  mon.out 
+	  perlmain.c $(BOOTSTRAP) \
+	  tmon.out *perl.core \
+	  core.[0-9] perl \
+	  $(BASEEXT).x pm_to_blib.ts \
+	  MYMETA.yml so_locations \
+	  core $(BASEEXT).exp \
+	  core.[0-9][0-9] mon.out \
+	  MYMETA.json $(MAKE_APERL_FILE) \
+	  core.[0-9][0-9][0-9][0-9][0-9] $(INST_ARCHAUTODIR)/extralibs.ld \
+	  core.*perl.*.? $(BASEEXT).bso \
+	  core.[0-9][0-9][0-9] perl$(EXE_EXT) \
+	  *$(LIB_EXT) $(BASEEXT).def \
+	  perl.exe blibdirs.ts \
+	  *$(OBJ_EXT) pm_to_blib \
+	  lib$(BASEEXT).def core.[0-9][0-9][0-9][0-9] \
+	  $(INST_ARCHAUTODIR)/extralibs.all 
 	- $(RM_RF) \
 	  PGObject-Util-PGConfig-* blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
@@ -472,7 +472,7 @@ realclean_subdirs :
 # Delete temporary files (via clean) and also delete dist files
 realclean purge ::  clean realclean_subdirs
 	- $(RM_F) \
-	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) 
+	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) 
 	- $(RM_RF) \
 	  $(DISTVNAME) 
 
@@ -500,8 +500,10 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
+	$(NOECHO) $(ECHO) '  DBD::Pg: 0' >> META_new.yml
+	$(NOECHO) $(ECHO) '  DBI: 0' >> META_new.yml
 	$(NOECHO) $(ECHO) '  perl: 5.006' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: v0.01.02' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: 0.010002' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -538,12 +540,14 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      },' >> META_new.json
 	$(NOECHO) $(ECHO) '      "runtime" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '            "DBD::Pg" : "0",' >> META_new.json
+	$(NOECHO) $(ECHO) '            "DBI" : "0",' >> META_new.json
 	$(NOECHO) $(ECHO) '            "perl" : "5.006"' >> META_new.json
 	$(NOECHO) $(ECHO) '         }' >> META_new.json
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "v0.01.02"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0.010002"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
@@ -844,6 +848,8 @@ ppd :
 	$(NOECHO) $(ECHO) '    <AUTHOR>Chris Travers &lt;chris.travers@adjust.com&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <PERLCORE VERSION="5,006,0,0" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="DBD::Pg" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="DBI::" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-thread-multi-2level-5.18" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
