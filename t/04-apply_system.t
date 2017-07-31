@@ -7,7 +7,7 @@ plan skip_all => 'DB_TESTING is not set' unless $ENV{DB_TESTING};
 
 plan tests => 2;
 
-my $config = PGObject::Util::PGConfig;
+my $config = PGObject::Util::PGConfig->new();
 
 isa_ok($config, 'PGObject::Util::PGConfig', 'Got back a PGObject::Util::PGConfig object');
 $config->set('max_connections', 2000);

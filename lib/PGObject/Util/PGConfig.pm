@@ -198,6 +198,9 @@ sub sync_session{
 Requires superuser access.  Runs ALTER SYSTEM commands for all appropriate
 keys.
 
+Returns a list of keys applied.  This can then be used to check against
+expected behavior.
+
 =cut
 
 sub apply_system {
