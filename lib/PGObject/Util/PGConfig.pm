@@ -193,6 +193,42 @@ sub sync_session{
     }
 }
 
+=head2 apply_system($dbh)
+
+Requires superuser access.  Runs ALTER SYSTEM commands for all appropriate
+keys.
+
+=cut
+
+sub apply_system {
+    my ($self, $dbh) = @_;
+    croak 'Need a database handle' unless ref $dbh;
+    my $sth = $dbh->prepare('
+          select rolsuper from pg_roles where rolname = session_user
+    ');
+    $sth->execute();
+    if (! ($sth->fetchrow_array)[0]){
+        croak 'DB connection for apply_system must be for a superuser';
+    }
+    my $setting_sth = $dbh->prepare("
+      select name from setting where name = any(?)
+      and context <> 'internal'
+    ");
+    $setting_sth->execute([$self->known_keys]);
+    my @settings;
+    while (my ($setting) = $setting_sth->fetchrow_array){
+       push @settings, $setting;
+    }
+    $setting_sth->finish;
+    for (@settings){
+        my $key = $dbh->quote_identifier($_);
+        my $value = $dbh->quote($self->get_value($_));
+        $dbh->do("ALTER SYSTEM SET $key TO $value");
+    } 
+    return @settings;
+    
+}
+
 =head2 File and Contents
 
 This module is also capable of reading to and writing to files

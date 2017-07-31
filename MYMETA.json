@@ -32,10 +32,12 @@
       },
       "runtime" : {
          "requires" : {
+            "DBD::Pg" : "0",
+            "DBI" : "0",
             "perl" : "5.006"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "v0.01.02"
+   "version" : "0.010002"
 }

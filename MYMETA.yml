@@ -18,5 +18,7 @@ no_index:
     - t
     - inc
 requires:
+  DBD::Pg: 0
+  DBI: 0
   perl: 5.006
-version: v0.01.02
+version: 0.010002
