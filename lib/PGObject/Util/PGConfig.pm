@@ -11,11 +11,11 @@ PGObject::Util::PGConfig - Postgres Configuration Management
 
 =head1 VERSION
 
-Version 0.10.2
+Version 0.20
 
 =cut
 
-our $VERSION = 0.010002;
+our $VERSION = 0.020000;
 
 
 =head1 SYNOPSIS

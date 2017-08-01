@@ -1,3 +1,4 @@
+.travis.yml
 Changes
 lib/PGObject/Util/PGConfig.pm
 Makefile.PL
@@ -7,6 +8,8 @@ t/00-load.t
 t/01-store-api.t
 t/02-fileparsing.t
 t/03-dbsessions.t
+t/04-apply_system.t
+t/data/myconfig2.conf
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
