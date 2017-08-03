@@ -19,11 +19,11 @@
 #     MIN_PERL_VERSION => q[5.006]
 #     NAME => q[PGObject::Util::PGConfig]
 #     PL_FILES => {  }
-#     PREREQ_PM => { Test::More=>q[0], DBD::Pg=>q[0], DBI=>q[0] }
+#     PREREQ_PM => { DBD::Pg=>q[0], Test::More=>q[0], DBI=>q[0] }
 #     TEST_REQUIRES => {  }
 #     VERSION_FROM => q[lib/PGObject/Util/PGConfig.pm]
 #     clean => { FILES=>q[PGObject-Util-PGConfig-*] }
-#     dist => { SUFFIX=>q[gz], COMPRESS=>q[gzip -9f] }
+#     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
 
 # --- MakeMaker post_initialize section:
 
@@ -442,24 +442,24 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  *$(LIB_EXT) $(BASEEXT).x \
-	  perl$(EXE_EXT) $(MAKE_APERL_FILE) \
-	  $(BASEEXT).def *$(OBJ_EXT) \
-	  MYMETA.yml mon.out \
-	  core.*perl.*.? lib$(BASEEXT).def \
-	  $(INST_ARCHAUTODIR)/extralibs.ld core.[0-9][0-9] \
-	  $(BASEEXT).bso $(BOOTSTRAP) \
-	  perl tmon.out \
-	  core.[0-9][0-9][0-9] perl.exe \
-	  $(BASEEXT).exp core \
-	  so_locations pm_to_blib.ts \
-	  core.[0-9][0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9][0-9] \
-	  $(INST_ARCHAUTODIR)/extralibs.all core.[0-9] \
-	  *perl.core MYMETA.json \
-	  perlmain.c pm_to_blib \
-	  blibdirs.ts 
+	  core.*perl.*.? *$(OBJ_EXT) \
+	  core.[0-9][0-9] $(BASEEXT).def \
+	  core tmon.out \
+	  perlmain.c pm_to_blib.ts \
+	  $(INST_ARCHAUTODIR)/extralibs.ld blibdirs.ts \
+	  lib$(BASEEXT).def $(BASEEXT).x \
+	  *$(LIB_EXT) mon.out \
+	  *perl.core $(INST_ARCHAUTODIR)/extralibs.all \
+	  core.[0-9][0-9][0-9][0-9] perl.exe \
+	  core.[0-9] perl \
+	  so_locations MYMETA.yml \
+	  core.[0-9][0-9][0-9][0-9][0-9] $(MAKE_APERL_FILE) \
+	  MYMETA.json $(BOOTSTRAP) \
+	  core.[0-9][0-9][0-9] pm_to_blib \
+	  $(BASEEXT).bso $(BASEEXT).exp \
+	  perl$(EXE_EXT) 
 	- $(RM_RF) \
-	  PGObject-Util-PGConfig-* blib 
+	  blib PGObject-Util-PGConfig-* 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
 
 
@@ -472,7 +472,7 @@ realclean_subdirs :
 # Delete temporary files (via clean) and also delete dist files
 realclean purge ::  clean realclean_subdirs
 	- $(RM_F) \
-	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) 
+	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) 
 	- $(RM_RF) \
 	  $(DISTVNAME) 
 

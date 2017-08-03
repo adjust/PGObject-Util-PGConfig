@@ -11,11 +11,11 @@ PGObject::Util::PGConfig - Postgres Configuration Management
 
 =head1 VERSION
 
-Version 0.20
+Version 0.20.1
 
 =cut
 
-our $VERSION = 0.020000;
+our $VERSION = 0.020001;
 
 
 =head1 SYNOPSIS
@@ -316,13 +316,6 @@ sub tofile {
     print $fh $self->filecontents;
     close $fh;
 }
-
-=head2 Future Versions
-
-=head3 sync_system($dbh)
-
-This command will use ALTER SYSTEM statements to set defaults to be used on 
-next PostgreSQL restart or reload.  Not yet supported.
 
 =head1 AUTHOR
 

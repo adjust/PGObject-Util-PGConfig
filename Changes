@@ -1,5 +1,11 @@
 Revision history for PGObject-Util-PGConfig
 
+0.20.1
+	Doc fixes
+
+0.20.0	2017-07-31
+	Added ALTER SYSTEM syupport
+
 0.10.2	2017-07-21
 	Version number increment for indexing
 

@@ -9,6 +9,7 @@ t/01-store-api.t
 t/02-fileparsing.t
 t/03-dbsessions.t
 t/04-apply_system.t
+t/data/myconf.conf
 t/data/myconfig2.conf
 t/manifest.t
 t/pod-coverage.t
